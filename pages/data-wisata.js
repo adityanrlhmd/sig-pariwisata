@@ -1,38 +1,60 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
 import { createClient } from 'contentful';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export async function getServerSideProps() {
   const client = createClient({
     space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE,
-    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_KEY
-  })
+    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_KEY,
+  });
 
-  const res = await client.getEntries({ content_type: 'wisata' })
-  return { props: { data: res } };
+  const res = await client.getEntries({ content_type: 'wisata' });
+  return { props: { data: res.items } };
 }
 
 export default function DataWisata({ data }) {
-  console.log(data.items)
+  const router = useRouter();
+  // console.log(data);
   return (
-    <main
-      className={` min-h-screen ${inter.className}`}
-    >
+    <main className="min-h-screen font-roboto">
       <Navbar />
 
-      <section id="home" class="bg-cover py-48" style={{backgroundImage: 'url(https://images.unsplash.com/photo-1682686579688-c2ba945eda0e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80)'}}>
-        <div class="container px-4 text-center text-white">
-          <h1 class="mb-6 text-5xl font-semibold lg:text-4xl xl:text-5xl">Data Wisata</h1>
-          <p class="text-base lg:text-xl xl:text-2xl">Halaman ini memuat informasi mengenai destinasi wisata di Kabupaten Sukabumi</p>
+      <section id="home" className="bg-bottom py-52 bg-contrast-50" style={{ backgroundImage: 'url(img/pixabay.jpg)' }}>
+        <div className="container px-4 text-center text-white">
+          <h1 className=" text-5xl font-semibold lg:text-4xl xl:text-5xl">Data Wisata</h1>
+          <p className="text-base lg:text-xl xl:text-2xl">Halaman ini memuat informasi mengenai destinasi wisata di Kabupaten Sukabumi</p>
         </div>
       </section>
-
-      <section>
-        <div class="my-48 container h-96 bg-slate-500 text-center">Data Wisata</div>
-      </section>
+      <div className="px-10 py-10 flex flex-wrap justify-center gap-4 bg-repeat" style={{ backgroundImage: 'url(img/group.png)' }}>
+        {data.map((item) => {
+          const dataWisata = item.fields;
+          return (
+            <div className="card w-full md:w-96 bg-slate-900 bg-opacity-10 backdrop-blur-sm shadow-sm text-gray-600 ">
+              <div className="card-body">
+                <h2 className="card-title">{dataWisata.name}</h2>
+                <p>{dataWisata.address}</p>
+                <p>Harga Tiket: {dataWisata.price}</p>
+                <button
+                  onClick={() => {
+                    router.push(`/data-wisata/${item.sys.id}`);
+                  }}
+                  className="rounded-full px-4 py-2 font-normal bg-info w-32 text-xs hover:translate-x-3 transition"
+                >
+                  Lihat detail
+                </button>
+              </div>
+            </div>
+          );
+        })}
+        ;
+      </div>
+      <Footer />
     </main>
-  )
+  );
 }

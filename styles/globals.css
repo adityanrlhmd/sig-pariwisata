@@ -3,9 +3,31 @@
 @tailwind utilities;
 
 .wrap-detail-wisata {
-  @apply !z-[9999]
+  @apply !z-[9998];
 }
 
 .EZDrawer label {
-  @apply !z-[9998]
+  @apply !z-[9997];
+}
+
+.social-media {
+  @apply mr-3 flex h-9 w-9 items-center justify-center text-white hover:rounded-full hover:border-primary hover:bg-white hover:text-primary;
+}
+
+.navbar-fixed {
+  @apply fixed z-[9999] bg-gray-500 bg-opacity-60 backdrop-blur-sm shadow-sm;
+}
+
+.hamburger-line {
+  @apply w-[30px] h-[2px] my-2 block bg-dark;
+}
+
+.hamburger-active > span:nth-child(1) {
+  @apply rotate-45;
+}
+.hamburger-active > span:nth-child(2) {
+  @apply scale-0;
+}
+.hamburger-active > span:nth-child(3) {
+  @apply -rotate-45;
 }

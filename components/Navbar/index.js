@@ -1,14 +1,38 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from 'next/link';
+import React, { useEffect } from 'react';
 
 const Navbar = () => {
+  useEffect(() => {
+    // Navbar Fixed
+    window.onscroll = function () {
+      const header = document.querySelector('header');
+      if (header) {
+        const navFixed = header.offsetTop;
+
+        if (window.pageYOffset > navFixed) {
+          header.classList.add('navbar-fixed');
+        } else {
+          header.classList.remove('navbar-fixed');
+        }
+      }
+    };
+
+    // Hamburger
+    const hamburger = document.querySelector('#hamburger');
+    const navMenu = document.querySelector('#nav-menu');
+
+    hamburger.addEventListener('click', function () {
+      hamburger.classList.toggle('hamburger-active');
+      navMenu.classList.toggle('hidden');
+    });
+  }, []);
   return (
-    <header className="absolute top-0 left-0 z-10 flex items-center w-full bg-transparent">
+    <header className=" absolute top-0 left-0 z-10 flex items-center w-full bg-transparent">
       <div className="container">
         <div className="relative flex items-center justify-between">
           <div className="px-4">
-            <Link href="/" className="block py-4">
-              <img className=' mix-blend-color-burn object-contain aspect-[4/3] w-32' src="https://cdn.antaranews.com/cache/800x533/2014/01/logo-kab-sukabumi-1.jpg" alt="" />
+            <Link href="/" className="block py-2">
+              <img className=" object-contain aspect-[4/3] w-16" src="img/logo.png" alt="Logo" />
             </Link>
           </div>
           <div className="flex items-center px-4">
@@ -20,10 +44,19 @@ const Navbar = () => {
             <nav id="nav-menu" className="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
               <ul className="block lg:flex">
                 <li className="group">
-                  <Link href="/" className="flex py-2 mx-8 text-base font-semibold text-dark group-hover:text-primary">Home</Link>
+                  <Link href="/" className="flex uppercase py-2 mx-4 text-sm font-semibold text-white group-hover:text-primary hover:border-b-white">
+                    Home
+                  </Link>
                 </li>
                 <li className="group">
-                  <Link href="data-wisata" className="flex py-2 mx-8 text-base font-semibold text-dark group-hover:text-primary">Data Wisata</Link>
+                  <Link href="/data-wisata" className="flex uppercase py-2 mx-4 text-sm font-semibold text-white group-hover:text-primary">
+                    Data Wisata
+                  </Link>
+                </li>
+                <li className="group">
+                  <Link href="login" className="flex uppercase py-2 mx-4 text-sm font-semibold text-white group-hover:text-primary">
+                    Login
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -31,7 +64,7 @@ const Navbar = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
