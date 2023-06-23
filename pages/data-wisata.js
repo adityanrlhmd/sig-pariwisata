@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import image from 'next/image';
 import { Inter } from 'next/font/google';
 import { createClient } from 'contentful';
 import Navbar from '@/components/Navbar';

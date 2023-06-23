@@ -9,13 +9,14 @@ import { Inter } from 'next/font/google';
 const SectionMap = dynamic(() => import('@/components/Home/SectionMap'), { ssr: false });
 
 export default function Home({ data }) {
+  // console.log(data);
   return (
     <main className="min-h-screen font-roboto">
       <Navbar />
 
       <section
         id="home"
-        className="py-48 bg-cover"
+        className="py-28 lg:py-48 bg-cover"
         style={{
           backgroundImage: 'url(img/istawali.jpg)',
         }}

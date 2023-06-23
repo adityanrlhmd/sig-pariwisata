@@ -7,7 +7,7 @@ import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import DetailMap from './DetailMap';
 
-const position = [-6.9208, 106.9258];
+const position = [-7.010838, 106.7900198];
 
 const newicon = new Leaflet.Icon({
   iconUrl: 'https://cdn.iconscout.com/icon/free/png-512/free-pin-locate-marker-location-navigation-16-28668.png?f=avif&w=512',
@@ -33,11 +33,11 @@ const SectionMap = ({ dataWisata }) => {
       </Drawer>
 
       <section className="bg-repeat-y" style={{ backgroundImage: 'url(img/group.png)' }}>
-        <div className="text-center pt-48">
+        <div className="text-center mt-10 lg:mt-40">
           <h1 className=" mb-4 text-2xl font-semibold md:text-3xl lg:text-4xl">Peta Lokasi Wisata</h1>
 
-          <div className="p-20">
-            <MapContainer center={position} zoom={10} scrollWheelZoom={true} style={{ width: '100%' }} className="min-h-[300px] lg:min-h-[70vh] ">
+          <div className="p-2 lg:p-20">
+            <MapContainer center={position} zoom={10} scrollWheelZoom={false} style={{ width: '100%' }} className="min-h-[300px] lg:min-h-[70vh] ">
               <TileLayer attribution='&copy; <Link href="https://www.openstreetmap.org/copyright">OpenStreetMap</Link> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
               {dataWisata.map((item, index) => {
                 const fields = item.fields;

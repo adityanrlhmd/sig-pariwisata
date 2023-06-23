@@ -31,7 +31,7 @@ const UpdateWisata = ({ dataWisata, idWisata, setRefreshData }) => {
   const [longitude, setLongitude] = useState(dataWisata ? dataWisata.coordinate.lon : 0);
   const [latitude, setLatitude] = useState(dataWisata ? dataWisata.coordinate.lat : 0);
   const [price, setPrice] = useState(dataWisata ? dataWisata.price : '');
-
+  const [description, setDescription] = useState(dataWisata ? dataWisata.description : '');
   const handleModal = () => {
     setIsOpen(!isOpen);
   };
@@ -50,6 +50,9 @@ const UpdateWisata = ({ dataWisata, idWisata, setRefreshData }) => {
           lon: parseFloat(longitude),
           lat: parseFloat(latitude),
         },
+      },
+      description: {
+        'en-US': description,
       },
       price: {
         'en-US': price,
@@ -85,6 +88,9 @@ const UpdateWisata = ({ dataWisata, idWisata, setRefreshData }) => {
             </div>
             <div className="form-control w-full mb-2">
               <input type="number" placeholder="Latitude " className="input input-bordered" value={latitude} step={'any'} onChange={(e) => setLatitude(e.target.value)} />
+            </div>
+            <div className="form-control w-full mb-2">
+              <input type="text" placeholder="Deskripsi" className="input input-bordered" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
             <div className="form-control w-full mb-2">
               <input type="text" placeholder="Harga Tiket" className="input input-bordered" value={price} onChange={(e) => setPrice(e.target.value)} />

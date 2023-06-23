@@ -32,7 +32,7 @@ const Navbar = () => {
         <div className="relative flex items-center justify-between">
           <div className="px-4">
             <Link href="/" className="block py-2">
-              <img className=" object-contain aspect-[4/3] w-16" src="img/logo.png" alt="Logo" />
+              <img className=" object-contain aspect-[4/3] w-16" src="../img/logo.png" alt="Logo" />
             </Link>
           </div>
           <div className="flex items-center px-4">
@@ -41,20 +41,20 @@ const Navbar = () => {
               <span className="transition duration-300 ease-in-out hamburger-line"></span>
               <span className="transition duration-300 ease-in-out origin-bottom-left hamburger-line"></span>
             </button>
-            <nav id="nav-menu" className="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
-              <ul className="block lg:flex">
+            <nav id="nav-menu" className="hidden absolute py-5  bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none ">
+              <ul className="block lg:flex menu menu-horizontal">
                 <li className="group">
-                  <Link href="/" className="flex uppercase py-2 mx-4 text-sm font-semibold text-white group-hover:text-primary hover:border-b-white">
+                  <Link href="/" className="flex uppercase py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary hover:border-b-white">
                     Home
                   </Link>
                 </li>
                 <li className="group">
-                  <Link href="/data-wisata" className="flex uppercase py-2 mx-4 text-sm font-semibold text-white group-hover:text-primary">
+                  <Link href="/data-wisata" className="flex uppercase py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary">
                     Data Wisata
                   </Link>
                 </li>
                 <li className="group">
-                  <Link href="login" className="flex uppercase py-2 mx-4 text-sm font-semibold text-white group-hover:text-primary">
+                  <Link href="/login" className="flex uppercase py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary">
                     Login
                   </Link>
                 </li>

@@ -1,6 +1,9 @@
 import { createClient } from 'contentful';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import Image from 'next/image';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export async function getServerSideProps(ctx) {
   const client = createClient({
@@ -14,17 +17,20 @@ export async function getServerSideProps(ctx) {
 
 export default function DetailWisata({ data }) {
   const detailWisata = data.fields;
-  // const [photos, setPhotos] = useState([]);
+  // const { images, setImages } = useState([]);
 
   // useEffect(() => {
-  //   async function fetchData() {
-  //     const photoData = await fetchPhotoData();
-  //     setPhotos(photoData);
-  //   }
-
-  //   fetchData();
+  //   const fetchImages = async () => {
+  //     try {
+  //       const response = await client.getEntries({ content_type: 'image' });
+  //       setImages(response.items);
+  //     } catch (error) {
+  //       console.error('Error while fetching images:', error);
+  //     }
+  //   };
+  //   fetchImages();
   // }, []);
-  // console.log(data.fields);
+  // console.log(data);
   return (
     <main className="font-roboto " style={{ backgroundImage: 'url(../img/group.png)' }}>
       <Navbar />
@@ -48,11 +54,7 @@ export default function DetailWisata({ data }) {
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-2 align-top  left">Deskripsi</td>
-                <td className="py-2 text-justify font-semibold align-top  left">
-                  It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
-                  opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum'
-                  will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                </td>
+                <td className="py-2 text-justify font-semibold align-top  left">{detailWisata.description}</td>
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-2 align-top text left">Harga Tiket</td>
