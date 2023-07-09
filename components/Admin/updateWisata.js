@@ -2,6 +2,7 @@ import { createClient } from 'contentful-management';
 import React from 'react';
 ('use client');
 import { useState } from 'react';
+import { FaEdit } from 'react-icons/fa';
 
 export async function updateWisata(data, idWisata) {
   try {
@@ -70,8 +71,8 @@ const UpdateWisata = ({ dataWisata, idWisata, setRefreshData }) => {
 
   return (
     <div>
-      <button className="btn btn-xs btn-primary mb-2" onClick={handleModal}>
-        Update
+      <button className="btn bg-transparent border-none hover:bg-transparent mb-2 px-11" onClick={handleModal}>
+        <FaEdit color=" blue" className="w-5 h-5" />
       </button>
       <div className={isOpen ? 'modal modal-open' : 'modal'}>
         <div className="modal-box">

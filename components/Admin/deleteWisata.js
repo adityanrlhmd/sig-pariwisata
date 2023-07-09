@@ -3,8 +3,8 @@ import React from 'react';
 {
   ('useClient');
 }
-
 import { useState } from 'react';
+import { FaTrash } from 'react-icons/fa';
 
 export async function deleteWisata(idWisata) {
   try {
@@ -36,8 +36,8 @@ const DeleteWisata = ({ idWisata, setRefreshData }) => {
   };
   return (
     <div>
-      <button className="btn btn-xs btn-error" onClick={handleModal}>
-        Delete
+      <button className="btn bg-transparent border-none hover:bg-transparent px-11" onClick={handleModal}>
+        <FaTrash color="red" className="w-5 h-5" />
       </button>
       <div className={isOpen ? 'modal modal-open' : 'modal'}>
         <div className="modal-box">
@@ -62,13 +62,7 @@ const DeleteWisata = ({ idWisata, setRefreshData }) => {
               type="button"
               className="btn btn-primary"
             >
-              {isLoadDelete ? (
-                <>
-                  <span className="loading loading-spinner"></span> loading
-                </>
-              ) : (
-                'Ya'
-              )}
+              {isLoadDelete ? <span className="loading loading-dots loading-md"></span> : 'Ya'}
             </button>
           </div>
         </div>

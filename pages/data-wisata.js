@@ -2,6 +2,7 @@ import image from 'next/image';
 import { Inter } from 'next/font/google';
 import { createClient } from 'contentful';
 import Navbar from '@/components/Navbar';
+import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -23,7 +24,7 @@ export default function DataWisata({ data }) {
   // console.log(data);
   return (
     <main className="min-h-screen font-roboto">
-      <Navbar />
+      <Nav />
 
       <section id="home" className="bg-bottom py-52 bg-contrast-50" style={{ backgroundImage: 'url(img/pixabay.jpg)' }}>
         <div className="container px-4 text-center text-white">
@@ -31,11 +32,11 @@ export default function DataWisata({ data }) {
           <p className="text-base lg:text-xl xl:text-2xl">Halaman ini memuat informasi mengenai destinasi wisata di Kabupaten Sukabumi</p>
         </div>
       </section>
-      <div className="px-10 py-10 flex flex-wrap justify-center gap-4 bg-repeat" style={{ backgroundImage: 'url(img/group.png)' }}>
-        {data.map((item) => {
+      <div className="px-2 py-6 lg:p-10 flex flex-wrap justify-center gap-4 bg-repeat" style={{ backgroundImage: 'url(img/group.png)' }}>
+        {data.map((item, index) => {
           const dataWisata = item.fields;
           return (
-            <div className="card w-full md:w-96 bg-slate-900 bg-opacity-10 backdrop-blur-sm shadow-sm text-gray-600 ">
+            <div key={index} className="card w-full md:w-96 bg-slate-900 bg-opacity-10 backdrop-blur-sm shadow-sm text-gray-600 ">
               <div className="card-body">
                 <h2 className="card-title">{dataWisata.name}</h2>
                 <p>{dataWisata.address}</p>

@@ -44,17 +44,17 @@ const Navbar = () => {
             <nav id="nav-menu" className="hidden absolute py-5  bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none ">
               <ul className="block lg:flex menu menu-horizontal">
                 <li className="group">
-                  <Link href="/" className="flex uppercase py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary hover:border-b-white">
+                  <Link href="/" className="flex uppercase rounded-md hover:bg-white py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary ">
                     Home
                   </Link>
                 </li>
                 <li className="group">
-                  <Link href="/data-wisata" className="flex uppercase py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary">
+                  <Link href="/data-wisata" className="flex uppercase rounded-md hover:bg-white py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary">
                     Data Wisata
                   </Link>
                 </li>
                 <li className="group">
-                  <Link href="/login" className="flex uppercase py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary">
+                  <Link href="/login" className="flex uppercase rounded-md hover:bg-white py-2 mx-4 text-sm font-semibold text-black lg:text-white group-hover:text-primary">
                     Login
                   </Link>
                 </li>

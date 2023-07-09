@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import { createClient } from 'contentful';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
+import Nav from '@/components/Nav';
 
 // const inter = Inter({ subsets: ['latin'] });
 
@@ -12,7 +13,7 @@ export default function Home({ data }) {
   // console.log(data);
   return (
     <main className="min-h-screen font-roboto">
-      <Navbar />
+      <Nav />
 
       <section
         id="home"

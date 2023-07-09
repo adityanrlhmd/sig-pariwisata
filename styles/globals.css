@@ -11,7 +11,7 @@
 }
 
 .social-media {
-  @apply mr-3 flex h-9 w-9 items-center justify-center text-white hover:rounded-full hover:border-primary hover:bg-white hover:text-primary;
+  @apply mr-3 flex h-9 w-9 items-center justify-center text-white hover:rounded-full hover:border-primary hover:bg-white;
 }
 
 .navbar-fixed {

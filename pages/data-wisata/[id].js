@@ -1,9 +1,9 @@
-import { createClient } from 'contentful';
 import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
-import Image from 'next/image';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import Nav from '@/components/Nav';
+import { createClient } from 'contentful';
+import dynamic from 'next/dynamic';
+
+const DetailMap = dynamic(() => import('@/components/DetailMap'), { ssr: false });
 
 export async function getServerSideProps(ctx) {
   const client = createClient({
@@ -17,30 +17,17 @@ export async function getServerSideProps(ctx) {
 
 export default function DetailWisata({ data }) {
   const detailWisata = data.fields;
-  // const { images, setImages } = useState([]);
 
-  // useEffect(() => {
-  //   const fetchImages = async () => {
-  //     try {
-  //       const response = await client.getEntries({ content_type: 'image' });
-  //       setImages(response.items);
-  //     } catch (error) {
-  //       console.error('Error while fetching images:', error);
-  //     }
-  //   };
-  //   fetchImages();
-  // }, []);
-  // console.log(data);
   return (
     <main className="font-roboto " style={{ backgroundImage: 'url(../img/group.png)' }}>
-      <Navbar />
+      <Nav />
       <section className="bg-bottom py-52" style={{ backgroundImage: 'url(../img/francesco.jpg)' }}>
         <div className="container px-4 text-center text-white">
           <h1 className=" text-5xl font-semibold lg:text-4xl xl:text-5xl uppercase">detail data wisata</h1>
         </div>
       </section>
       <div className="my-32 flex bg-slate-600 bg-opacity-20 shadow-sm backdrop-blur-lg rounded-3xl py-16 container gap-2 ">
-        <div className="w-3/4">
+        <div className="w-full">
           <h1 className="text-2xl font-semibold px-1 pb-2">Informasi Wisata</h1>
           <table className="table-normal w-full">
             <tbody className="text-slate-500">
@@ -63,8 +50,19 @@ export default function DetailWisata({ data }) {
             </tbody>
           </table>
         </div>
-        <div className="">
+
+        <div className="w-full">
           <h1 className="text-2xl font-semibold px-1 pb-2">Lokasi</h1>
+
+          <DetailMap
+            position={[detailWisata?.coordinate?.lat, detailWisata?.coordinate?.lon]}
+            positionMark={[detailWisata?.coordinate?.lat, detailWisata?.coordinate?.lon]}
+            contentDetailMark={
+              <>
+                <span>{detailWisata?.name}</span>
+              </>
+            }
+          />
         </div>
       </div>
       <Footer />

@@ -2,12 +2,15 @@ import { getSupabase } from '@/utils/supabase';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 const inter = Inter({ subsets: ['latin'] });
 
 const Login = () => {
   const router = useRouter();
   const supabase = getSupabase();
+
+  const [cookies, setCookie] = useCookies();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +30,7 @@ const Login = () => {
       if (error) return error;
 
       if (data.session !== null) {
+        setCookie('accessToken', data.session.access_token);
         router.push('/dashboard');
       }
     } catch (err) {
@@ -53,7 +57,7 @@ const Login = () => {
             </div>
             <div className="form-control mt-6">
               <button disabled={isLoading} className="btn btn-primary">
-                {isLoading ? 'Loading' : 'Login'}
+                {isLoading ? <span className="loading loading-dots loading-md"></span> : 'Login'}
               </button>
             </div>
           </form>

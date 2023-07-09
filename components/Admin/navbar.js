@@ -1,8 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { BsBoxArrowRight } from 'react-icons/bs';
+import { useCookies } from 'react-cookie';
+import { useRouter } from 'next/router';
 
 const NavAdmin = () => {
+  const router = useRouter();
+  const [cookies, setCookie, removeCookie] = useCookies();
   return (
     <div className="">
       <div className="px-24 fixed navbar bg-white backdrop-blur-sm bg-opacity-50 shadow-md w-full right-0 left-0">
@@ -20,7 +24,14 @@ const NavAdmin = () => {
               </label>
               <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                 <li>
-                  <Link href="/">Logout</Link>
+                  <button
+                    onClick={() => {
+                      removeCookie('accessToken');
+                      router.replace('/');
+                    }}
+                  >
+                    <BsBoxArrowRight color="red" className="w-5 h-5" />
+                  </button>
                 </li>
               </ul>
             </div>

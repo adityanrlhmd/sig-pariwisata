@@ -7,6 +7,7 @@ import Link from 'next/link';
 import AddWisata from '@/components/Admin/addWisata';
 import DeleteWisata from '@/components/Admin/deleteWisata';
 import UpdateWisata from '@/components/Admin/updateWisata';
+import Cookies from 'cookies';
 
 // const inter = Inter({ subsets: ['latin'] });
 
@@ -23,6 +24,23 @@ export async function getAllWisata() {
   } catch (err) {
     throw err;
   }
+}
+
+export async function getServerSideProps({ req, res }) {
+  const cookies = new Cookies(req, res);
+
+  const AT = cookies.get('accessToken');
+
+  if (!AT) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+  // const cookies = ctx.req.headers.cookie;
+  return { props: { AT } };
 }
 
 export default function DataWisata() {
@@ -76,7 +94,7 @@ export default function DataWisata() {
                   <td className="p-4 align-top text left ">{dataWisata.coordinate.lon}</td>
                   <td className="p-4 align-top text left ">{dataWisata.coordinate.lat}</td>
                   <td className="p-4 align-top text left ">{dataWisata.price}</td>
-                  <td className="p-4 align-top">
+                  <td className="p-4 align-top items-center">
                     <UpdateWisata idWisata={item.sys.id} dataWisata={dataWisata} setRefreshData={setRefreshData} />
                     <DeleteWisata idWisata={item.sys.id} setRefreshData={setRefreshData} />
                   </td>

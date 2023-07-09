@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import Leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import ZoomMap from '../zoomMap';
 
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
@@ -19,7 +20,7 @@ const SectionMap = ({ dataWisata }) => {
   const [idEntry, setIdEntry] = useState('');
 
   return (
-    <>
+    <main>
       <Drawer
         open={isOpenDetail}
         onClose={() => {
@@ -37,29 +38,31 @@ const SectionMap = ({ dataWisata }) => {
           <h1 className=" mb-4 text-2xl font-semibold md:text-3xl lg:text-4xl">Peta Lokasi Wisata</h1>
 
           <div className="p-2 lg:p-20">
-            <MapContainer center={position} zoom={10} scrollWheelZoom={false} style={{ width: '100%' }} className="min-h-[300px] lg:min-h-[70vh] ">
-              <TileLayer attribution='&copy; <Link href="https://www.openstreetmap.org/copyright">OpenStreetMap</Link> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              {dataWisata.map((item, index) => {
-                const fields = item.fields;
-                const coordinateMark = [fields.coordinate.lat, fields.coordinate.lon];
+            <div className="relative">
+              <MapContainer center={position} zoom={10} scrollWheelZoom={false} style={{ width: '100%' }} className="min-h-[300px] lg:min-h-[70vh] ">
+                <TileLayer attribution='&copy; <Link href="https://www.openstreetmap.org/copyright">OpenStreetMap</Link> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                {dataWisata.map((item, index) => {
+                  const fields = item.fields;
+                  const coordinateMark = [fields.coordinate.lat, fields.coordinate.lon];
 
-                const openDetail = () => {
-                  setIsOpenDetail(true);
-                  setIdEntry(item.sys.id);
-                };
+                  const openDetail = () => {
+                    setIsOpenDetail(true);
+                    setIdEntry(item.sys.id);
+                  };
 
-                return (
-                  <Marker key={index} position={coordinateMark} icon={newicon}>
-                    <Popup>
-                      <span>{fields.name}</span> <br />
-                      <span onClick={openDetail} className="cursor-pointer">
-                        Open detail
-                      </span>
-                    </Popup>
-                  </Marker>
-                );
-              })}
-            </MapContainer>
+                  return (
+                    <Marker key={index} position={coordinateMark} icon={newicon}>
+                      <Popup>
+                        <span>{fields.name}</span> <br />
+                        <span onClick={openDetail} className="cursor-pointer">
+                          Open detail
+                        </span>
+                      </Popup>
+                    </Marker>
+                  );
+                })}
+              </MapContainer>
+            </div>
           </div>
 
           <h1 className="mb-4 text-2xl font-semibold mt-32 md:text-3xl lg:text-4xl">Jangkauan Peta</h1>
@@ -70,10 +73,10 @@ const SectionMap = ({ dataWisata }) => {
         </div>
         <div className="py-48">
           <h1 className="mb-4 text-2xl font-semibold text-center md:text-3xl lg:text-4xl">Jumlah Tempat Wisata</h1>
-          <h2 className="text-2xl font-semibold text-center md:text-3xl lg:text-4xl">{dataWisata.length}</h2>
+          <h2 className="text-2xl font-semibold text-center md:text-3xl lg:text-4xl text-blue-600">{dataWisata.length}</h2>
         </div>
       </section>
-    </>
+    </main>
   );
 };
 
