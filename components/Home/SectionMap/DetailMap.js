@@ -49,6 +49,14 @@ const DetailMap = ({ idEntry }) => {
           <td className="border-b align-top text-start">Alamat</td>
           <td className="border-b align-top text-start">{dataDetail?.address}</td>
         </tr>
+        <button
+          onClick={() => {
+            router.push(`/data-wisata/${idEntry}`);
+          }}
+          className="rounded-full mt-6 px-4 py-2 font-normal bg-info w-32 text-xs hover:translate-x-3 transition"
+        >
+          Lihat detail
+        </button>
       </table>
     </div>
   );
