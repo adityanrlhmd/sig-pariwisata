@@ -3,6 +3,7 @@ import Nav from '@/components/Nav';
 import { createClient } from 'contentful';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import Image from 'next/image';
 
 const DetailMap = dynamic(() => import('@/components/DetailMap'), { ssr: false });
 
@@ -18,7 +19,6 @@ export async function getServerSideProps(ctx) {
 
 export default function DetailWisata({ data }) {
   const detailWisata = data.fields;
-
   return (
     <main className="font-roboto " style={{ backgroundImage: 'url(../img/group.png)' }}>
       <Head>
@@ -33,43 +33,48 @@ export default function DetailWisata({ data }) {
           <h1 className=" text-5xl font-semibold lg:text-4xl xl:text-5xl uppercase">detail data wisata</h1>
         </div>
       </section>
-      <div className="my-32 lg:flex bg-slate-600 bg-opacity-20 shadow-sm backdrop-blur-lg rounded-3xl py-16 px-2 lg:container gap-2 ">
-        <div className="w-full lg:w-3/5 mb-16">
-          <h1 className="text-2xl font-semibold px-1 pb-2">Informasi Wisata</h1>
-          <table className="table-normal w-full">
-            <tbody className="text-slate-500">
-              <tr className="border-b border-slate-100">
-                <td className="py-2 align-top  left w-[20%]">Nama Wisata</td>
-                <td className="py-2 font-semibold align-top left">{detailWisata.name}</td>
-              </tr>
-              <tr className="border-b border-slate-100">
-                <td className="py-2 align-top  left">Alamat</td>
-                <td className="py-2 text-justify font-semibold align-top  left">{detailWisata.address}</td>
-              </tr>
-              <tr className="border-b border-slate-100">
-                <td className="py-2 align-top  left">Deskripsi</td>
-                <td className="py-2 text-justify font-semibold align-top  left">{detailWisata.description}</td>
-              </tr>
-              <tr className="border-b border-slate-100">
-                <td className="py-2 align-top text left">Harga Tiket</td>
-                <td className="py-2 font-semibold align-top text left">{detailWisata.price}</td>
-              </tr>
-            </tbody>
-          </table>
+      <div className="my-32 bg-slate-600 bg-opacity-20 shadow-sm backdrop-blur-lg rounded-3xl py-16 px-2 lg:container ">
+        <div className="mb-10 flex justify-center">
+          <img className="w-[500px] h-[300px] rounded-lg" src={detailWisata.thumbnail.fields.file.url} alt="Gambar" />
         </div>
+        <div className="lg:flex gap-2">
+          <div className="w-full lg:w-3/5 mb-16">
+            <h1 className="text-2xl font-semibold px-1 pb-2">Informasi Wisata</h1>
+            <table className="table-normal w-full">
+              <tbody className="text-slate-500">
+                <tr className="border-b border-slate-100">
+                  <td className="py-2 align-top  left w-[20%]">Nama Wisata</td>
+                  <td className="py-2 font-semibold align-top left">{detailWisata.name}</td>
+                </tr>
+                <tr className="border-b border-slate-100">
+                  <td className="py-2 align-top  left">Alamat</td>
+                  <td className="py-2 text-justify font-semibold align-top  left">{detailWisata.address}</td>
+                </tr>
+                <tr className="border-b border-slate-100">
+                  <td className="py-2 align-top  left">Deskripsi</td>
+                  <td className="py-2 text-justify font-semibold align-top  left">{detailWisata.description}</td>
+                </tr>
+                <tr className="border-b border-slate-100">
+                  <td className="py-2 align-top text left">Harga Tiket</td>
+                  <td className="py-2 font-semibold align-top text left">{detailWisata.price}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-        <div className="w-full lg:w-2/5">
-          <h1 className="text-2xl font-semibold px-1 pb-2">Lokasi</h1>
+          <div className="w-full lg:w-2/5">
+            <h1 className="text-2xl font-semibold px-1 pb-2">Lokasi</h1>
 
-          <DetailMap
-            position={[detailWisata?.coordinate?.lat, detailWisata?.coordinate?.lon]}
-            positionMark={[detailWisata?.coordinate?.lat, detailWisata?.coordinate?.lon]}
-            contentDetailMark={
-              <>
-                <span>{detailWisata?.name}</span>
-              </>
-            }
-          />
+            <DetailMap
+              position={[detailWisata?.coordinate?.lat, detailWisata?.coordinate?.lon]}
+              positionMark={[detailWisata?.coordinate?.lat, detailWisata?.coordinate?.lon]}
+              contentDetailMark={
+                <>
+                  <span>{detailWisata?.name}</span>
+                </>
+              }
+            />
+          </div>
         </div>
       </div>
       <Footer />
